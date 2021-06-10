@@ -43,34 +43,34 @@ using namespace std;
 const int MOD=1e9+7;
 const int N = 1e5 + 5;
 
-bool sortbysec(const pair<int,int> &a, 
-              const pair<int,int> &b) 
-{ 
-    return (a.second < b.second); 
-} 
+bool sortbysec(const pair<int,int> &a,
+               const pair<int,int> &b)
+{
+    return (a.second < b.second);
+}
 void init()
 {
-	#ifndef ONLINE_JUDGE
-	freopen("in.txt","r",stdin);
-	freopen("out.txt","w",stdout);
-	#endif
-	boost;
+#ifndef ONLINE_JUDGE
+    freopen("in.txt","r",stdin);
+    freopen("out.txt","w",stdout);
+#endif
+    boost;
 }
 
 ll gcd(ll a, ll b)
 {
-	return b ? gcd(b, a % b) : a;
+    return b ? gcd(b, a % b) : a;
 }
 
 ll lcm(ll a, ll b)
 {
-	return a / gcd(a, b) * b;
+    return a / gcd(a, b) * b;
 }
 
 ll bincoff(ll a, ll b)
 {
     double res=1;
-    for(int i=1;i<=b;i++)
+    for(int i=1; i<=b; i++)
     {
         res*=(a-b+i)/i;
     }
@@ -112,7 +112,7 @@ vector<ll>eulertotient(ll n)
     vector<ll>v;
     v.pb(1);
     v.pb(n-1);
-    for(ll i=2;i<n-1;i++)
+    for(ll i=2; i<n-1; i++)
     {
         if(gcd(i,n)==1)
             v.pb(i);
@@ -158,21 +158,21 @@ map<ll, ll> prime_factor(ll n)
 
 vector<ll> prime_sieve(ll n)
 {
-	vector<ll> ret;
-	vector<bool> rm(n + 1, 0);
-	int bsz = max(3, int(ceil(sqrt(n))));
-	rm[1] = 1;
-	fup (fac, 2, bsz) if (!rm[fac])
-		for (ll g = 1ll * fac * fac; g <= n; g += fac)
-			rm[g] = 1;
-	fup (x, 2, n) if (!rm[x])
-		ret.pb(x);
-	return ret;
+    vector<ll> ret;
+    vector<bool> rm(n + 1, 0);
+    int bsz = max(3, int(ceil(sqrt(n))));
+    rm[1] = 1;
+    fup (fac, 2, bsz) if (!rm[fac])
+        for (ll g = 1ll * fac * fac; g <= n; g += fac)
+            rm[g] = 1;
+    fup (x, 2, n) if (!rm[x])
+        ret.pb(x);
+    return ret;
 }
 
 vector<bool> segmentedSieve(ll a,ll b)
 {
-    
+
     ll lim = sqrt(b);
     vector<bool> mark(lim + 1, false);
     vector<ll> primes;
@@ -220,7 +220,7 @@ pair<ll, ll> fib (ll n)
     else
         return {c, d};
 }
- 
+
 #define maxsize 1001
 ll arr[maxsize];
 
@@ -231,8 +231,8 @@ void enqueue(ll x)
 {
     if((rear+1)%maxsize==front)
     {
-    	cout<<"Overflow"<<endl;
-    	return;
+        cout<<"Overflow"<<endl;
+        return;
     }
     else if(rear ==-1 && front==-1)
     {
@@ -241,96 +241,99 @@ void enqueue(ll x)
     }
     else
     {
-    	rear = (rear+1)%maxsize;
-    	arr[rear]=x;
+        rear = (rear+1)%maxsize;
+        arr[rear]=x;
     }
 }
 
 void dequeue()
 {
-	if(rear==-1 && front==-1)
-	{
-		cout<<"Circuler Queue is empty"<<endl;
-		return;
-	}
-	else if(front==rear)
-	{
-       rear=front=-1;
-	}
-	else
-	{
-		//cout<<"Dequeued Element is: "<<arr[front]<<endl;
-		front=(front+1)%maxsize;
-	}
+    if(rear==-1 && front==-1)
+    {
+        cout<<"Circuler Queue is empty"<<endl;
+        return;
+    }
+    else if(front==rear)
+    {
+        rear=front=-1;
+    }
+    else
+    {
+        //cout<<"Dequeued Element is: "<<arr[front]<<endl;
+        front=(front+1)%maxsize;
+    }
 }
 
 void display()
 {
-	if(front==-1 && rear==-1)
-	{
-		cout<<"Circuler Queue is empty"<<endl;
-		return;
-	}
-	else 
-	{
-		ll i=front;
-        cout<<"Circuler Queue is: "
+    if(front==-1 && rear==-1)
+    {
+        cout<<"Circular Queue is empty"<<endl;
+        return;
+    }
+    else
+    {
+        ll i=front;
+        cout<<"Circular Queue is: ";
         while(i!=rear)
         {
             cout<<arr[i]<<" ";
             i=(i+1)%maxsize;
         }
-	}
+        cout<<arr[rear]<<endl;
+    }
 }
 
 void peek()
 {
-	if(front==-1 && rear==-1)
-	{
-		cout<<"Circular Queue is empty"<<endl;
-		return;
-	}
-	else
-	{
-		cout<<arr[front]<<endl;
-	}
+    if(front==-1 && rear==-1)
+    {
+        cout<<"Circular Queue is empty"<<endl;
+        return;
+    }
+    else
+    {
+        cout<<arr[front]<<endl;
+    }
 }
 
 void isfull()
 {
-	if((rear+1)%maxsize==front)
+    if((rear+1)%maxsize==front)
     {
         cout<<"Overflow"<<endl;
         return;
     }
     else
     {
-    	cout<<"Circuler Queue is not full"<<endl;
+        cout<<"Circular Queue is not full"<<endl;
     }
 }
 
 void isempty()
 {
-	if(front==-1 && rear==-1)
-	{
-		cout<<"Circuler Queue is empty"<<endl;
-		return;
-	}
-	else
-	{
-		cout<<"Circuler Queue is not empty"<<endl;
-		return;
-	}
+    if(front==-1 && rear==-1)
+    {
+        cout<<"Circular Queue is empty"<<endl;
+        return;
+    }
+    else
+    {
+        cout<<"Circular Queue is not empty"<<endl;
+        return;
+    }
 }
 
 int main()
 {
 
-   init();
-   enqueue(1);
-   enqueue(2);
-   display();
-   dequeue();
-   display(); 
-   
+
+    enqueue(1);
+    enqueue(2);
+    enqueue(4);
+    display();
+    dequeue();
+    display();
+
+
 }
