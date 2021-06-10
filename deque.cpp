@@ -323,13 +323,36 @@ void dequeue_rear()
 
 void display()
 {
-	ll i=front;
-	while(i!=rear)
-	{
-		cout<<"Dequeue is :"<<d[i]<<" ";
-		i=(i+1)%N;
-	}
-	cout<<d[rear]<<endl;
+	ll front_pos=front,rear_pos=rear;
+	if(front==-1)
+    {
+        cout<<"Queue is empty"<<endl;
+        return;
+    }
+    cout<<"List is: ";
+    if(front_pos<=rear_pos)
+    {
+        while(front_pos<=rear_pos)
+        {
+            cout<<d[front_pos]<<" ";
+            front_pos++;
+        }
+    }
+    else
+    {
+        while(front_pos<=N-1)
+        {
+            cout<<d[front_pos]<<" ";
+            front_pos++;
+        }
+        front_pos=0;
+        while(front_pos<=rear_pos)
+        {
+            cout<<d[front_pos]<<" ";
+            front_pos++;
+        }
+    }
+    cout<<endl;
 }
 
 void getfront()
