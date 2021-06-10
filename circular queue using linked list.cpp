@@ -43,34 +43,34 @@ using namespace std;
 const int MOD=1e9+7;
 const int N = 1e5 + 5;
 
-bool sortbysec(const pair<int,int> &a, 
-              const pair<int,int> &b) 
-{ 
-    return (a.second < b.second); 
-} 
+bool sortbysec(const pair<int,int> &a,
+               const pair<int,int> &b)
+{
+    return (a.second < b.second);
+}
 void init()
 {
-	#ifndef ONLINE_JUDGE
-	freopen("in.txt","r",stdin);
-	freopen("out.txt","w",stdout);
-	#endif
-	boost;
+#ifndef ONLINE_JUDGE
+    freopen("in.txt","r",stdin);
+    freopen("out.txt","w",stdout);
+#endif
+    boost;
 }
 
 ll gcd(ll a, ll b)
 {
-	return b ? gcd(b, a % b) : a;
+    return b ? gcd(b, a % b) : a;
 }
 
 ll lcm(ll a, ll b)
 {
-	return a / gcd(a, b) * b;
+    return a / gcd(a, b) * b;
 }
 
 ll bincoff(ll a, ll b)
 {
     double res=1;
-    for(int i=1;i<=b;i++)
+    for(int i=1; i<=b; i++)
     {
         res*=(a-b+i)/i;
     }
@@ -112,7 +112,7 @@ vector<ll>eulertotient(ll n)
     vector<ll>v;
     v.pb(1);
     v.pb(n-1);
-    for(ll i=2;i<n-1;i++)
+    for(ll i=2; i<n-1; i++)
     {
         if(gcd(i,n)==1)
             v.pb(i);
@@ -158,21 +158,21 @@ map<ll, ll> prime_factor(ll n)
 
 vector<ll> prime_sieve(ll n)
 {
-	vector<ll> ret;
-	vector<bool> rm(n + 1, 0);
-	int bsz = max(3, int(ceil(sqrt(n))));
-	rm[1] = 1;
-	fup (fac, 2, bsz) if (!rm[fac])
-		for (ll g = 1ll * fac * fac; g <= n; g += fac)
-			rm[g] = 1;
-	fup (x, 2, n) if (!rm[x])
-		ret.pb(x);
-	return ret;
+    vector<ll> ret;
+    vector<bool> rm(n + 1, 0);
+    int bsz = max(3, int(ceil(sqrt(n))));
+    rm[1] = 1;
+    fup (fac, 2, bsz) if (!rm[fac])
+        for (ll g = 1ll * fac * fac; g <= n; g += fac)
+            rm[g] = 1;
+    fup (x, 2, n) if (!rm[x])
+        ret.pb(x);
+    return ret;
 }
 
 vector<bool> segmentedSieve(ll a,ll b)
 {
-    
+
     ll lim = sqrt(b);
     vector<bool> mark(lim + 1, false);
     vector<ll> primes;
@@ -223,94 +223,94 @@ pair<ll, ll> fib (ll n)
 
 typedef struct node
 {
-	ll data;
-	struct node *link;
-}node;
+    ll data;
+    struct node *link;
+} node;
 
 node *rear=NULL;
 node *front=NULL;
 
 void enqueue(ll x)
 {
-	node *newnode = (node*)malloc(sizeof(node));
-	newnode->data=x;
-	newnode->link=NULL;
-	if(rear==NULL && front==NULL)
-	{
-		front=rear=newnode;
-		rear->link=front;
-	}
-	else
-	{
-		rear->link=newnode;
-		rear=newnode;
-		rear->link=front;
-	}
-} 
+    node *newnode = (node*)malloc(sizeof(node));
+    newnode->data=x;
+    newnode->link=NULL;
+    if(rear==NULL && front==NULL)
+    {
+        front=rear=newnode;
+        rear->link=front;
+    }
+    else
+    {
+        rear->link=newnode;
+        rear=newnode;
+        rear->link=front;
+    }
+}
 
 void dequeue()
 {
-	node *temp;
-	temp=front;
-	if(rear==NULL && front==NULL)
-	{
-		cout<<"Circular Queue is empty"<<endl;
-		return;
-	}
-	else if(front==rear)
-	{
-       front=rear=NULL;
-       free(temp);
-	}
-	else
-	{
-		//cout<<"Dequeued element is: "<<front->data<<endl;
-		front=front->link;
-		rear->link=front;
-		free(temp);
-	}
+    node *temp;
+    temp=front;
+    if(rear==NULL && front==NULL)
+    {
+        cout<<"Circular Queue is empty"<<endl;
+        return;
+    }
+    else if(front==rear)
+    {
+        front=rear=NULL;
+        free(temp);
+    }
+    else
+    {
+        //cout<<"Dequeued element is: "<<front->data<<endl;
+        front=front->link;
+        rear->link=front;
+        free(temp);
+    }
 }
 
 void display()
 {
-	node *temp=front;
-	if(rear==NULL && front==NULL)
-	{
-		cout<<"Circular Queue is empty"<<endl;
-		return;
-	}
-	else
-	{
-		while(temp->link!=front)
-		{
-			cout<<temp->data<<endl;
-			temp=temp->link;
-		}
-		cout<<temp->data<<endl;
-	}
+    node *temp=front;
+    if(rear==NULL && front==NULL)
+    {
+        cout<<"Circular Queue is empty"<<endl;
+        return;
+    }
+    else
+    {
+        cout<<"List is: ";
+        while(temp->link!=front)
+        {
+            cout<<temp->data<<" ";
+            temp=temp->link;
+        }
+        cout<<temp->data<<endl;
+    }
 }
 
 void peek()
 {
-	if(rear==NULL && front==NULL)
-	{
-		cout<<"Circular Queue is empty"<<endl;
-		return;
-	}
-	else
-	{
-      cout<<front->data<<endl;
-	}
+    if(rear==NULL && front==NULL)
+    {
+        cout<<"Circular Queue is empty"<<endl;
+        return;
+    }
+    else
+    {
+        cout<<front->data<<endl;
+    }
 }
 
 int main()
 {
 
-   init();
-
-   
-
-
-        
+    enqueue(3);
+    enqueue(4);
+    enqueue(-1);
+    dequeue();
+    display();
 
 }
