@@ -224,7 +224,7 @@ pair<ll, ll> fib (ll n)
 typedef struct node
 {
 	ll data;
-	struct node *link;
+	struct node *next;
 }node;
 
 node *rear=NULL;
@@ -234,14 +234,14 @@ void enqueue(ll x)
 {
 	node *newnode = (node*)malloc(sizeof(node));
 	newnode->data=x;
-	newnode->link=NULL;
+	newnode->next=NULL;
 	if(rear==NULL && front==NULL)
 	{
 		front=rear=newnode;
 	}
 	else
 	{
-		rear->link=newnode;
+		rear->next=newnode;
 		rear=newnode;
 	}
 } 
@@ -258,7 +258,7 @@ void dequeue()
 	else
 	{
 		cout<<"Dequeued element is :"<<front->data<<endl;
-		front=front->link;
+		front=front->next;
 		free(temp);
 	}
 }
@@ -277,7 +277,7 @@ void display()
 		while(temp!=NULL)
 		{
 			cout<<temp->data<<endl;
-			temp=temp->link;
+			temp=temp->next;
 		}
 		cout<<endl;
 	}
