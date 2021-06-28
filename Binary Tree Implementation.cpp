@@ -405,7 +405,28 @@ void levelorder_recurisve(node *root)
 	}
 }
 
- 
+ vector<ll>v;
+
+void leaf_node(node *root)
+{
+    if(!root)
+    {
+        return;
+    }
+    if(!root->left_child && !root->right_child)
+    {
+        v.pb(root->data);
+        return;
+    }
+    if(root->left_child)
+    {
+        leaf_node(root->left_child);
+    }
+    if(root->right_child)
+    {
+        leaf_node(root->right_child);
+    }
+}
 
 int main()
 {
