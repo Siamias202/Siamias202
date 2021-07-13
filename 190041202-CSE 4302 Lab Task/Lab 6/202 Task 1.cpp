@@ -1,70 +1,121 @@
-#include<bits/stdc++.h>
+
+#include <iostream>
 using namespace std;
+
 class Counter
 {
 private:
-    int Count,step;
+    int count,add;
 public:
-    Counter():Count(0),step(1)
+
+    Counter():count(0),add(1)
     {
 
     }
-    Counter(int a,int b):Count(a),step(b)
+
+    Counter(int c, int a):count(c),add(a)
     {
 
     }
-    void setIncrementStep(int step_val)
+
+    void setIncrementStep(int step_val=1)
     {
-        if(step_val<0)
+        if(step_val>0)
         {
-            cout<<"Negative value";
-            return;
+            add=step_val;
         }
-        else step=step_val;
-    }
-    int getCount()
-    {
-        return Count;
     }
     void increment()
     {
-        Count+=step;
-    }
-    void resetCount()
-    {
-        Count=0;
-    }
-    Counter operator +(Counter a)
-    {
-        return Counter(Count+a.Count,min(step,a.step));
+        count+=add;
     }
 
+    int getCount()
+    {
+        return count;
+    }
+
+    void resetCount()
+    {
+        count=0;
+    }
+
+    //c1 =c2+c3
+    Counter operator +(Counter c3)
+    {
+        return Counter((count+c3.count),min(add,c3.add));
+    }
+
+    Counter operator +(int var)
+    {
+        return Counter((count+var),count);
+    }
+
+    friend Counter operator +(int var,Counter c1 );
 
 
     Counter operator ++()
     {
-        Count+=step;
-        return Counter(Count,step);
+        return Counter(++count,add);
     }
+
+
 
     Counter operator ++(int)
     {
-        Count+=step;
-        return Counter(Count,step);
+        return Counter(count++,add);
     }
-    Counter operator +=(Counter a)
+
+    void operator +=(Counter c1)
     {
-        return Counter(Count+a.Count, step);
+        count+=c1.count;
+
     }
 
 };
 
+
+Counter operator +(int var,Counter c1 )
+{
+    return Counter(var+c1.count,c1.count);
+}
+
+
 int main()
 {
-   Counter c1;
+
+   Counter c1,c2(3,3),c3;
+
+   //increment set and printing c1
+   c1.setIncrementStep(4);
    c1.increment();
-   Counter c2;
-   c1.increment();
-   Counter c3=c1+c2;
+   cout<<c1.getCount()<<endl;
+
+
+   //increment set and printing c2
+
+
+   c2.increment();
+   cout<<c2.getCount()<<endl;
+
+
+   //assigning c1 and c2 into c3
+
+   c3=c1+c2;
    cout<<c3.getCount()<<endl;
+
+   //c1+=c2
+
+   c1+=c2;
+   cout<<c1.getCount()<<endl;
+
+   //c2=c1++
+
+   c2=c1++;
+   cout<<c2.getCount()<<endl;
+
+   //c2=++c1;
+   c2=++c1;
+   cout<<c2.getCount()<<endl;
+
 }
