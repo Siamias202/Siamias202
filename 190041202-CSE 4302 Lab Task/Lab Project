@@ -1,0 +1,207 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+class Account
+{
+private:
+   string account_holder_name;
+   int account_no;
+   int retrive_balance;
+   int amount=(rand()%(1001))+1000;
+public:
+    Account(string an,int accno)
+    {
+        account_holder_name=an;
+        account_no=accno;
+
+    }
+
+    void withdraw_balance(int b)
+    {
+        if(b+100==amount)
+        {
+            cout<<"Can't Withdraw"<<endl;
+        }
+        else
+        {
+            amount-=b;
+            cout<<"Ticket Confirmed"<<endl;
+        }
+    }
+
+    void add_money(int b)
+    {
+        amount+=b;
+    }
+    friend ostream &operator <<(ostream &out,const Account &obj)
+    {
+        out<<obj.account_no<<"    "<<obj.amount<<endl;
+        return out;
+    }
+
+};
+
+class long_route
+{
+private:
+    string driver_name;
+    string starting_time;
+    string approximate_ending_time;
+    bool ac;
+public:
+    long_route(string dn,string st,string aet,bool ac)
+    {
+        driver_name=dn;
+        starting_time=st;
+        approximate_ending_time=aet;
+        this->ac=ac;
+    }
+
+};
+
+class short_route
+{
+private:
+    string ticket_collector_name;
+public:
+    short_route(string tcn)
+    {
+        ticket_collector_name=tcn;
+    }
+};
+
+class Person
+{
+protected:
+    string name;
+    int age;
+    string address;
+
+public:
+    Person(string name,int age,string address)
+    {
+        this->name=name;
+        this->age=age;
+        this->address=address;
+    }
+    friend ostream &operator <<(ostream &out,const Person &obj)
+    {
+        out<<obj.name<<"     "<<obj.age<<"   "<<obj.address<<endl;
+        return out;
+    }
+};
+
+
+
+
+class Bus
+{
+private:
+    string bus_name;
+    string starting_address;
+    string ending_address;
+    int bus_fare;
+public:
+
+
+};
+
+class Station
+{
+private:
+    int ticekt_counter_no;
+    string ticket_counter_bus;
+    int total_ticket;
+    string passenger_name;
+    string ticket_provider_name;
+public:
+    void show()
+    {
+
+    }
+
+};
+
+template<class A>
+vector<A>& operator+=(vector<A>&v1,A& x)
+{
+
+    v1.push_back(x);
+    return v1;
+}
+
+vector<Person>vp;
+vector<Account>va;
+vector<string>vs;
+map<string, vector<string> >mps;
+
+map<string,int>dest_wise_fare{{"Chittagong",700},{"Rajshahi",650},{"Rangpur",550},{"Khulna",1000},{"Sylhet",350},
+                               {"Dhaka",660},{"Mymensingh",220},{"Barishal",990}};
+int main()
+{
+    cout<<"Welcome to Bus reservation System"<<endl;
+    cout<<"Destination         Fare"<<endl;
+    for(auto x:dest_wise_fare)
+    {
+        cout<<x.first<<"         "<<x.second<<endl;
+    }
+    cout<<endl<<endl;
+    cout<<"How many Passenger we have:";
+    int x;
+    cin>>x;
+    vp.clear();
+    while(x--)
+    {
+        cout<<"Enter Passenger Name: ";
+        string n;
+        cin>>n;
+
+        fflush(stdin);
+
+        cout<<"Enter Age: ";
+        int age;
+        cin>>age;
+
+        fflush(stdin);
+
+
+        cout<<"Enter Address:";
+        string address;
+        cin>>address;
+
+        fflush(stdin);
+
+        cout<<"Enter Account No: ";
+        int acc;
+        cin>>acc;
+        fflush(stdin);
+
+
+        Person p(n,age,address);
+        vp+=p;
+        Account a(n,acc);
+        va+=a;
+        vs+=n;
+
+        cout<<"Where passenger want to go?";
+        string des;
+        cin>>des;
+        mps[des].push_back(n);
+        fflush(stdin);
+    }
+
+    ofstream fout("Passenger.txt");
+    for(int i=0;i<va.size();i++)
+    {
+        fout.write((char*)&vp[i],sizeof(vp[i]));,
+    }
+
+    for(auto x:mps)
+    {
+        cout<<x.first<<" "<<x.second.size()<<endl;
+    }
+
+
+}
